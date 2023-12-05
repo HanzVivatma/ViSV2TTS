@@ -1,1 +1,3 @@
+https://huggingface.co/datnt114/vivos_ViSV2TTS/resolve/main/D_150000.pth?download=true
+https://huggingface.co/datnt114/vivos_ViSV2TTS/resolve/main/G_150000.pth?download=true
 
