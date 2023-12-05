@@ -100,8 +100,8 @@ def clonevoice(text: str, speaker_wav, file_upload, language: str):
      return [outfile, text_norm]
 
 inputs = [gr.Textbox(label="Input", value="muốn ngồi ở một vị trí không ai ngồi được thì phải chịu cảm giác không ai chịu được", max_lines=3),
-          gr.Audio(Lable="Speaker Wav", source="microphone", type="filepath"), 
-          gr.Audio(Lable="Speaker Wav", source="upload", type="filepath"), 
+          gr.Audio(label="Speaker Wav", sources="microphone", type="filepath"), 
+          gr.Audio(label="Speaker Wav", sources="upload", type="filepath"), 
           gr.Radio(label="Language", choices=["Vietnamese"], value="en")]
 outputs = [gr.Audio(label="Output"), gr.TextArea()]
 
