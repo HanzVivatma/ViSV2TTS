@@ -4,7 +4,8 @@ from resemblyzer import preprocess_wav, VoiceEncoder
 import numpy as np
 import glob, tqdm
 
-encoder = VoiceEncoder(device='cpu')
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+encoder = VoiceEncoder(device=device)
 
 def extract_speaker_embedding():
      wavs = glob.glob("DATA/wavs/*.wav")
