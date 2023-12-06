@@ -3,6 +3,7 @@ import glob
 from resemblyzer import preprocess_wav, VoiceEncoder
 import numpy as np
 import glob, tqdm
+import torch
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 encoder = VoiceEncoder(device=device)
