@@ -41,8 +41,15 @@ def load_checkpoint(checkpoint_path, model, optimizer=None):
     model.load_state_dict(new_state_dict)
   logger.info("Loaded checkpoint '{}' (iteration {})" .format(
     checkpoint_path, iteration))
-  return model, optimizer, learning_rate, iteration
+  return model.to(device), optimizer, learning_rate, iteration
 
+def load_checkpoint_scheduler(checkpoint_path, optimizer=None, gamma=None, last_epoch=None):
+  assert os.path.isfile(checkpoint_path)
+  assert optimizer is not None
+  checkpoint_dict = torch.load(checkpoint_path, map_location=device)
+  scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=gamma, last_epoch=last_epoch)
+  scheduler.load_state_dict(checkpoint_dict['scheduler'])
+  return scheduler
 
 def save_checkpoint(model, optimizer, learning_rate, iteration, checkpoint_path):
   logger.info("Saving model and optimizer state at iteration {} to {}".format(
