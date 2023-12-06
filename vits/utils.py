@@ -10,6 +10,7 @@ from scipy.io.wavfile import read
 import torch
 
 MATPLOTLIB_FLAG = False
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging
@@ -17,7 +18,7 @@ logger = logging
 
 def load_checkpoint(checkpoint_path, model, optimizer=None):
   assert os.path.isfile(checkpoint_path)
-  checkpoint_dict = torch.load(checkpoint_path, map_location='cpu')
+  checkpoint_dict = torch.load(checkpoint_path, map_location=device)
   iteration = checkpoint_dict['iteration']
   learning_rate = checkpoint_dict['learning_rate']
   if optimizer is not None:
