@@ -41,7 +41,7 @@ def load_checkpoint(checkpoint_path, model, optimizer=None):
     model.load_state_dict(new_state_dict)
   logger.info("Loaded checkpoint '{}' (iteration {})" .format(
     checkpoint_path, iteration))
-  return model.to(device), optimizer, learning_rate, iteration
+  return model, optimizer, learning_rate, iteration
 
 def load_checkpoint_scheduler(checkpoint_path, optimizer=None, gamma=None, last_epoch=None):
   assert os.path.isfile(checkpoint_path)
