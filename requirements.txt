@@ -17,6 +17,6 @@ monotonic_align
 torch==1.13.1
 torchvision==0.14.1
 torchaudio==0.13.1
-#scipy==1.5.2
+#scipy==1.11.4
 requests
 vinorm
