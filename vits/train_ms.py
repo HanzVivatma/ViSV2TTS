@@ -101,13 +101,15 @@ def run(rank, n_gpus, hps):
   net_d = DDP(net_d, device_ids=[rank])
 
   try:
-    _, _, _, epoch_str = utils.load_checkpoint(utils.latest_checkpoint_path(hps.model_dir, "G_*.pth"), net_g, optim_g)
-    _, _, _, epoch_str = utils.load_checkpoint(utils.latest_checkpoint_path(hps.model_dir, "D_*.pth"), net_d, optim_d)
+    net_g, optim_g, _, epoch_str = utils.load_checkpoint(utils.latest_checkpoint_path(hps.model_dir, "G_*.pth"), net_g, optim_g)
+    net_d, optim_d, _, epoch_str = utils.load_checkpoint(utils.latest_checkpoint_path(hps.model_dir, "D_*.pth"), net_d, optim_d)
     global_step = (epoch_str - 1) * len(train_loader)
   except:
     epoch_str = 1
     global_step = 0
 
+  #scheduler_g = utils.load_checkpoint_scheduler(utils.latest_checkpoint_path(hps.model_dir, "G_*.pth"), optim_g, gamma=hps.train.lr_decay, last_epoch=epoch_str-2)
+  #scheduler_g = utils.load_checkpoint_scheduler(utils.latest_checkpoint_path(hps.model_dir, "D_*.pth"), optim_d, gamma=hps.train.lr_decay, last_epoch=epoch_str-2)
   scheduler_g = torch.optim.lr_scheduler.ExponentialLR(optim_g, gamma=hps.train.lr_decay, last_epoch=epoch_str-2)
   scheduler_d = torch.optim.lr_scheduler.ExponentialLR(optim_d, gamma=hps.train.lr_decay, last_epoch=epoch_str-2)
 
