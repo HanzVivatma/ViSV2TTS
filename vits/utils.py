@@ -61,6 +61,7 @@ def save_checkpoint(model, optimizer, learning_rate, iteration, checkpoint_path)
   torch.save({'model': state_dict,
               'iteration': iteration,
               'optimizer': optimizer.state_dict(),
+              'scheduler': scheduler.state_dict(),
               'learning_rate': learning_rate}, checkpoint_path)
 
 
