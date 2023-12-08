@@ -51,7 +51,7 @@ def load_checkpoint_scheduler(checkpoint_path, optimizer=None, gamma=None, last_
   scheduler.load_state_dict(checkpoint_dict['scheduler'])
   return scheduler
 
-def save_checkpoint(model, optimizer, learning_rate, iteration, checkpoint_path):
+def save_checkpoint(model, optimizer, scheduler, learning_rate, iteration, checkpoint_path):
   logger.info("Saving model and optimizer state at iteration {} to {}".format(
     iteration, checkpoint_path))
   if hasattr(model, 'module'):
